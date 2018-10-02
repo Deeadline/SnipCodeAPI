@@ -1,21 +1,18 @@
-using System.Collections.Generic;
-using SnipCodeAPI.Repositories.Interfaces;
-using System;
 using SnipCodeAPI.Models;
-using System.Linq;
-using System.Threading.Tasks;
+using SnipCodeAPI.Repositories.Interfaces;
+using System.Collections.Generic;
 
 
 namespace SnipCodeAPI.Repositories
 {
     public class SnippetRepository : ISnippetRepository
     {
-        private IDataGateway DataGateway;
-        public SnippetRepository(IDataGateway dataGateway) => DataGateway = dataGateway;
-        public void DeleteSnippet(int snippetId) => DataGateway.RemoveSnippet(snippetId);
-        public Snippet GetSnippetById(int snippetId) => DataGateway.GetSnippetById(snippetId);
-        public IEnumerable<Snippet> GetSnippets() => DataGateway.GetAllSnippets();
-        public void InsertSnippet(Snippet snippet) => DataGateway.InsertSnippet(snippet);
-        public void UpdateSnippet(Snippet snippet) => DataGateway.UpdateSnippet(snippet);
+        private readonly IDataGateway _dataGateway;
+        public SnippetRepository(IDataGateway dataGateway) => _dataGateway = dataGateway;
+        public void DeleteSnippet(int snippetId) => _dataGateway.RemoveSnippet(snippetId);
+        public Snippet GetSnippetByHash(string hash) => _dataGateway.GetSnippetByHash(hash);
+        public IEnumerable<Snippet> GetSnippets() => _dataGateway.GetAllSnippets() ?? new List<Snippet>();
+        public void InsertSnippet(Snippet snippet) => _dataGateway.InsertSnippet(snippet);
+        public bool UpdateSnippet(Snippet snippet) => _dataGateway.UpdateSnippet(snippet);
     }
 }

@@ -1,8 +1,5 @@
 ﻿using SnipCodeAPI.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SnipCodeAPI.Repositories.Interfaces
 {
@@ -12,6 +9,6 @@ namespace SnipCodeAPI.Repositories.Interfaces
         User GetUserById(int userId);
         void InsertUser(User user);
         void DeleteUser(int id);
-        void UpdateUser(User user);
+        bool UpdateUser(User user);
     }
 }

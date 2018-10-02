@@ -1,21 +1,18 @@
-using System.Collections.Generic;
-using SnipCodeAPI.Repositories.Interfaces;
-using System;
 using SnipCodeAPI.Models;
-using System.Linq;
-using System.Threading.Tasks;
+using SnipCodeAPI.Repositories.Interfaces;
+using System.Collections.Generic;
 
 
 namespace SnipCodeAPI.Repositories
 {
     public class SnippetFileRepository : ISnippetFileRepository
     {
-        private IDataGateway DataGateway;
-        public SnippetFileRepository(IDataGateway dataGateway) => DataGateway = dataGateway;
-        public void DeleteSnippetFile(int snippetFileId) => DataGateway.RemoveSnippet(snippetFileId);
-        public SnippetFile GetSnippetFileById(int snippetFileId) => DataGateway.GetSnippetFileById(snippetFileId);
-        public IEnumerable<SnippetFile> GetSnippetFiles() => DataGateway.GetAllSnippetFiles();
-        public void InsertSnippetFile(SnippetFile snippetFile) => DataGateway.InsertSnippetFile(snippetFile);
-        public void UpdateSnippetFile(SnippetFile snippetFile) => DataGateway.UpdateSnippetFile(snippetFile);
+        private readonly IDataGateway _dataGateway;
+        public SnippetFileRepository(IDataGateway dataGateway) => _dataGateway = dataGateway;
+        public void DeleteSnippetFile(int snippetFileId) => _dataGateway.RemoveSnippetFile(snippetFileId);
+        public SnippetFile GetSnippetFileById(int snippetFileId) => _dataGateway.GetSnippetFileById(snippetFileId);
+        public IEnumerable<SnippetFile> GetSnippetFiles() => _dataGateway.GetAllSnippetFiles() ?? new List<SnippetFile>();
+        public void InsertSnippetFile(SnippetFile snippetFile) => _dataGateway.InsertSnippetFile(snippetFile);
+        public bool UpdateSnippetFile(SnippetFile snippetFile) => _dataGateway.UpdateSnippetFile(snippetFile);
     }
 }

@@ -1,17 +1,14 @@
 ﻿using SnipCodeAPI.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SnipCodeAPI.Repositories.Interfaces
 {
     public interface ISnippetRepository
     {
         IEnumerable<Snippet> GetSnippets();
-        Snippet GetSnippetById(int snippetId);
+        Snippet GetSnippetByHash(string hash);
         void InsertSnippet(Snippet snippet);
         void DeleteSnippet(int snippetId);
-        void UpdateSnippet(Snippet snippet);
+        bool UpdateSnippet(Snippet snippet);
     }
 }
